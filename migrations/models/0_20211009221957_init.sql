@@ -1,0 +1,26 @@
+-- upgrade --
+CREATE TABLE IF NOT EXISTS "combinekey" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "name" VARCHAR(100)  UNIQUE
+);
+CREATE TABLE IF NOT EXISTS "owner" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "name" VARCHAR(100)  UNIQUE
+);
+CREATE TABLE IF NOT EXISTS "dataset" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "name" VARCHAR(100)  UNIQUE,
+    "rating" INT,
+    "coast" INT,
+    "owner_id" INT NOT NULL REFERENCES "owner" ("id") ON DELETE CASCADE
+);
+CREATE TABLE IF NOT EXISTS "aerich" (
+    "id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    "version" VARCHAR(255) NOT NULL,
+    "app" VARCHAR(20) NOT NULL,
+    "content" JSON NOT NULL
+);
+CREATE TABLE IF NOT EXISTS "dataset_c_keys" (
+    "dataset_id" INT NOT NULL REFERENCES "dataset" ("id") ON DELETE CASCADE,
+    "combinekey_id" INT NOT NULL REFERENCES "combinekey" ("id") ON DELETE CASCADE
+);
