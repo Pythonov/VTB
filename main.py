@@ -113,7 +113,16 @@ async def create_depend(item: ObjItem = Body(
         "create_dependencies": {
             "description": "Create dependencies",
             "value": COMBINE_DATASET
-        }
+        },
+        "create_dataset": {
+            "description": "Create dataset",
+            "value": CREATE_DATASET
+        },
+        "create_owner": {
+            "description": "Create owner",
+            "value": CREATE_OWNER
+        },
+
     }
 )):
     target_class = item.target_class

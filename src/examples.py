@@ -44,14 +44,31 @@ CREATE_C_KEY = {
 CREATE_DATASET = {
     "target_class": "dataset",
     "data": {
-        "dataset_id": {"name": "TestDataset", "owner_id": "1"}
+        "dataset_id": {
+            "name": "TestDataset",
+            "rating": "79",
+            "coast": "5000",
+            "owner_id": {
+                "name": "Egitch"
+            }
+        }
     }
 }
+
+CREATE_OWNER = {
+  "target_class": "owner",
+  "data": {
+    "owner_id": {
+      "name": "Nikitch"
+    }
+  }
+}
+
 
 COMBINE_DATASET = {
     "target_class": "dataset",
     "data": {
-        "dataset_id": {"name": "TestDataset", "owner_id": "1"},
+        "dataset_id": {"name": "TestDataset"},
         "combine_key": [
           {
             "name": "Cats"
