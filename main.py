@@ -109,7 +109,12 @@ async def get_datasets(item: Item = Body(
 @app.post('/create_depend')
 async def create_depend(item: ObjItem = Body(
     ...,
-    example=" "
+    examples={
+        "create_dependencies": {
+            "description": "Create dependencies",
+            "value": COMBINE_DATASET
+        }
+    }
 )):
     target_class = item.target_class
     data = item.data

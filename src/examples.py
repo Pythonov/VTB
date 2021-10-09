@@ -48,3 +48,14 @@ CREATE_DATASET = {
     }
 }
 
+COMBINE_DATASET = {
+    "target_class": "dataset",
+    "data": {
+        "dataset_id": {"name": "TestDataset", "owner_id": "1"},
+        "combine_key": [
+          {
+            "name": "Cats"
+          }
+        ]
+    }
+}
