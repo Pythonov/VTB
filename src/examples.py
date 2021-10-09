@@ -59,3 +59,8 @@ COMBINE_DATASET = {
         ]
     }
 }
+
+GET_ALL_DATASETS = {
+  "target_class": "dataset",
+  "data": {}
+}
