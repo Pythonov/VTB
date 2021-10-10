@@ -219,9 +219,42 @@ async def get_combined(item: ObjItem = Body(
         adapter_dict[target_class],
         name=target_class,
     )
+
+
+
     response = await obj_pyd.from_queryset(adapter_dict[target_class].get(Q(**data)))
     num_of_items = len(response)
     return {"status": "Ok", "data": response[:count], "num_of_items": num_of_items}
+
+
+@app.post('/get_single', name="Получить один объект")
+async def get_single(item: ObjItem = Body(
+    ...,
+    examples={
+        "get_single_obj": {
+            "description": "Get single obj",
+            "value": {
+              "target_class": "owner",
+              "data": {
+                "name": "Egitch"
+              }
+            }
+        }
+    }
+)):
+    target_class = item.target_class
+    data = item.data
+    try:
+        obj_pyd = pydantic_model_creator(
+            adapter_dict[target_class],
+            name=target_class,
+        )
+        response = (
+            await obj_pyd.from_queryset_single(
+                adapter_dict[target_class].get(**data)))
+    except Exception as e:
+        return {"status": "not ok", "data": str(e)}
+    return {"status": "Ok", "data": response}
 
 
 if __name__ == '__main__':
