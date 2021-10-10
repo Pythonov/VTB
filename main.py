@@ -205,5 +205,24 @@ async def get_obj(item: ObjItem = Body(
     return {"status": "Ok", "data": response, "num_of_items": num_of_items}
 
 
+@app.post('/get_combined')
+async def get_combined(item: ObjItem = Body(
+    ...,
+    example=GET_ALL_DATASETS
+)):
+    target_class = item.target_class
+    data = item.data
+    count = data.get('count', 1)
+    data.pop('count')
+
+    obj_pyd = pydantic_model_creator(
+        adapter_dict[target_class],
+        name=target_class,
+    )
+    response = await obj_pyd.from_queryset(adapter_dict[target_class].get(Q(**data)))
+    num_of_items = len(response)
+    return {"status": "Ok", "data": response[:count], "num_of_items": num_of_items}
+
+
 if __name__ == '__main__':
     uvicorn.run(app, port=7070)
